@@ -1,6 +1,7 @@
 from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm
+from django.views.generic import TemplateView
 
 def register(request):
     if request.method == 'POST':
@@ -13,3 +14,5 @@ def register(request):
         form = CustomUserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
 
+class ContactView(TemplateView):
+    template_name = 'contact.html'
