@@ -16,3 +16,6 @@ def register(request):
 
 class ContactView(TemplateView):
     template_name = 'contact.html'
+
+class FaqView(TemplateView):
+    template_name = 'faq.html'
