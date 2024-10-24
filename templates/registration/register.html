@@ -7,22 +7,22 @@
     <form method="post" class="form-signin">
       {% csrf_token %}
       <div class="form-group">
-        {{ form.username.label_tag }}
+        <label for="id_username">{{ form.username.label }}</label><br>
         {{ form.username }}
       </div>
       <br>
       <div class="form-group">
-        {{ form.email.label_tag }}
+        <label for="id_email">{{ form.email.label }}</label><br>
         {{ form.email }}
       </div>
       <br>
       <div class="form-group">
-        {{ form.password1.label_tag }}
+        <label for="id_password1">{{ form.password1.label }}</label><br>
         {{ form.password1 }}
       </div>
       <br>
       <div class="form-group">
-        {{ form.password2.label_tag }}
+        <label for="id_password2">{{ form.password2.label }}</label><br>
         {{ form.password2 }}
       </div>
       <br>
@@ -30,4 +30,3 @@
     </form>
   </div>
 {% endblock %}
-

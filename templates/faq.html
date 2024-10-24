@@ -1,7 +1,70 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>FAQs</h1>
-<p>Answer</p>
-<!-- You can add a contact form or more content here -->
+<h1 class="faq-header">Frequently Asked Questions</h1>
+
+<div class="faq-container">
+    <h2>How do I apply for government housing aid?</h2>
+    <p>
+        To apply for housing assistance, contact your local Public Housing Authority (PHA). For more details, visit the official Housing Choice Voucher Program (Section 8) page <a href="https://www.hud.gov/topics/housing_choice_voucher_program_section_8" target="_blank">here</a>.
+    </p>
+
+    <h2>What are the different types of government housing aid programs?</h2>
+    <p>
+        There are several programs like Section 8 vouchers, public housing, and other affordable housing programs run by HUD. Eligibility is usually based on income and family size.
+    </p>
+
+    <h2>What documents do I need for my application?</h2>
+    <p>
+        Documents needed include identification, proof of income, bank statements, and details about your household. It’s best to have these ready when you apply.
+    </p>
+
+    <h2>How long does it take to get approved for housing aid?</h2>
+    <p>
+        The time it takes to get approved can vary, depending on demand and location. The process may take a few weeks or even several months in high-demand areas.
+    </p>
+
+    <h2>Who qualifies for government housing assistance?</h2>
+    <p>
+        Eligibility is based on income level, family size, citizenship status, and residency. Check with your local housing office for specific details about qualifications in your area.
+    </p>
+
+    <h2>Can I apply if I am homeless or at risk of becoming homeless?</h2>
+    <p>
+        Yes, many programs prioritize people who are homeless or at risk of becoming homeless. Emergency housing assistance is also available through local organizations.
+    </p>
+</div>
+
+<style>
+    .faq-header {
+        text-align: center;
+        font-size: 2.5em;
+        color: #264653;
+        margin-bottom: 30px;
+        font-weight: bold;
+        background-color: #2a9d8f;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .faq-container {
+        margin: 20px;
+        padding: 20px;
+        background-color: #f7f7f7;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .faq-container h2 {
+        color: #2a9d8f;
+        font-size: 1.5em;
+    }
+
+    .faq-container p {
+        font-size: 1.1em;
+        margin-bottom: 15px;
+        color: #264653;
+    }
+</style>
 {% endblock %}
