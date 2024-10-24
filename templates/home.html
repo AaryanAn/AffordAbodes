@@ -1,26 +1,25 @@
 {% extends "base.html" %}
 {% load static %}
 
-
 {% block content %}
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-
-
-<div class="container" style="position: relative;">
+<div class="container-fluid" style="position: relative;">
   <!-- Search bar -->
-  <form method="get" action="{% url 'home' %}">
-    <div class="input-group mb-3" style="position: absolute; top: 100px; left: 10px; z-index: 1; width: 300px;">
-      <input type="text" class="form-control" name="search" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2">
+  <form method="get" action="{% url 'home' %}" 
+        style="position: absolute; top: 200px; left: 50%; transform: translateX(-50%); z-index: 1;">
+    <div class="input-group mb-3" style="width: 300px;">
+      <input type="text" class="form-control" name="search" placeholder="Search..." 
+             aria-label="Search" aria-describedby="basic-addon2">
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary" style="background-color: #1D8F35; color: white;" type="submit">Search</button>
+        <button class="btn btn-outline-secondary" 
+                style="background-color: #1D8F35; color: white;" type="submit">Search</button>
       </div>
     </div>
   </form>
 </div>
-
 
 <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
@@ -49,6 +48,5 @@
     interval: 3000, // Set the slide interval in milliseconds (e.g., 3 seconds)
   });
 </script>
-
 
 {% endblock %}
