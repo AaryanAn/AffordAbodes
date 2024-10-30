@@ -2,6 +2,8 @@ from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm
 from django.views.generic import TemplateView
+from django.contrib.auth.views import LoginView
+from django.contrib import messages
 
 def register(request):
     if request.method == 'POST':
@@ -9,7 +11,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('home')  # Redirect to your desired page after registration
+            return redirect('home') 
     else:
         form = CustomUserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
@@ -19,3 +21,10 @@ class ContactView(TemplateView):
 
 class FaqView(TemplateView):
     template_name = 'faq.html'
+
+class CustomLoginView(LoginView):
+    template_name = 'registration/login.html'
+
+    def form_invalid(self, form):
+        messages.error(self.request, "No user found. Please check your credentials or create an account.")
+        return super().form_invalid(form)
