@@ -2,15 +2,12 @@
 
 {% block content %}
     <h1 class="d-flex justify-content-center">Homes for Sale:</h1>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center mb-4">
         <form method="get">
-            <div class="input-group">
+            <div class="input-group mb-3">
                 <input type="text" name="zip_code" class="form-control" placeholder="Zip Code">
                 <input type="text" name="city" class="form-control" placeholder="City">
                 <input type="text" name="address" class="form-control" placeholder="Address">
-                <!-- <div class="input-group-append">
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </div> -->
             </div>
             <div class="row g-3">
                 <div class="col-md-6">
@@ -23,57 +20,61 @@
                 </div>
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary">Apply Search Filter</button>
-                </div>  
-            </div>          
+                </div>
+            </div>
         </form>
     </div>
 
-    <ul class="list-group container">
-        {% if form.is_bound and form.is_valid %}
-            <h2>Search Results:</h2>
+    <div class="container">
+        <h2 class="mb-4">Search Results:</h2>
+
+        {% if products %}
+        <div class="row">
             {% for product in products %}
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-md-6">
-                            {% if product.image %}
-                                <img src="{{ product.image.url }}" alt="{{ product.title }}" class="img-fluid" style="width: 100%; height: auto;">
-                            {% endif %}
-                        </div>
-                        <div class="col-md-6">
-                            <h3><a href="{% url 'product_detail' product.id %}">{{ product.title }}</a></h3>
-                            <p>City: {{ product.city }}</p>
-                            <p>Price: ${{ product.price }}</p>
-                            <p>Address: {{ product.address }}</p>
-                            <p>Bedrooms: {{ product.num_bedrooms }}</p>
-                            <p>Number of Floors: {{ product.num_floors }}</p>
-                            <p>Square Feet: {{ product.square_feet }}</p>
-                            <p>Zipe Code: {{ product.zip_code }}</p>
-                            <!-- Add more details like bedrooms, square feet, etc. -->
-                        </div>
-                    </div>
-                </li>
-            {% endfor %}
-            {% if products.count == 0 %}
-                <p>No results found.</p>
-            {% endif %}
-        {% else %}
-            <h2>Homes for Sale:</h2>
-            {% for product in page %}
-                <li class="list-group-item">
-                    <a href="{% url 'product_detail' product.id %}">{{ product.title }}</a>
+            <div class="col-md-4">
+                <div class="card mb-4">
                     {% if product.image %}
-                        <img src="{{ product.image.url }}" alt="{{ product.title }}" width="300" height="200">
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}">
+                    {% else %}
+                    <img src="{% static 'images/placeholder.jpg' %}" class="card-img-top" alt="No Image Available">
                     {% endif %}
-                    
-                    <!-- Display the number of bedrooms and icon -->
-                    <div class="d-flex align-items-center">
-                        <i class="bi bi-bed"></i> <!-- Bootstrap icon for bed -->
-                        {{ product.num_bedrooms }} Bedrooms
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.title }}</h5>
+                        <p class="card-text">City: {{ product.city }}</p>
+                        <p class="card-text">Price: ${{ product.price }}</p>
+                        <p class="card-text">Bedrooms: {{ product.num_bedrooms }}</p>
+                        <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">View Details</a>
                     </div>
-                </li>
+                </div>
+            </div>
             {% endfor %}
+        </div>
+        {% else %}
+        <p>No local products found.</p>
         {% endif %}
-    </ul>
+
+        <h2 class="mt-5">External Property Listings:</h2>
+        {% if properties %}
+        <div class="row">
+            {% for property in properties %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    {% if property.photo %}
+                    <img src="{{ property.photo }}" class="card-img-top" alt="Property Photo">
+                    {% else %}
+                    <img src="{% static 'images/placeholder.jpg' %}" class="card-img-top" alt="No Image Available">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">${{ property.price }}</h5>
+                        <p class="card-text">{{ property.address.line }}, {{ property.address.city }}</p>
+                        <a href="#" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p>No external properties found.</p>
+        {% endif %}
+    </div>
 {% endblock %}
-
-
