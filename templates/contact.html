@@ -1,7 +1,88 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Contact Us</h1>
-<p>Feel free to reach out!</p>
-<!-- You can add a contact form or more content here -->
+<h1 class="contact-header">Contact Us</h1>
+
+<div class="contact-container">
+    <h2>How can I reach you?</h2>
+    <p>
+        You can contact us via email at <a href="mailto:support@example.com">support@example.com</a> or call us at (123) 456-7890. Our support team is available Monday to Friday, 9 AM to 5 PM.
+    </p>
+
+    <h2>Where is your office located?</h2>
+    <p>
+        Our main office is located at 123 Main Street, Gainesville, FL 32611. Feel free to visit us during our working hours!
+    </p>
+
+    <h2>How do I report an issue?</h2>
+    <p>
+        To report an issue, use our online form available <a href="/report-issue">here</a>. Alternatively, you can email us directly with detailed information about the issue.
+    </p>
+
+    <h2>Do you have a social media presence?</h2>
+    <p>
+        Yes, follow us on our social media channels for updates:
+        <ul>
+            <li><a href="https://www.facebook.com/example" target="_blank">Facebook</a></li>
+            <li><a href="https://twitter.com/example" target="_blank">Twitter</a></li>
+            <li><a href="https://www.instagram.com/example" target="_blank">Instagram</a></li>
+        </ul>
+    </p>
+
+    <h2>Can I schedule an appointment?</h2>
+    <p>
+        Yes, appointments can be scheduled through our booking page <a href="/schedule-appointment">here</a>. Please choose a time slot that works best for you.
+    </p>
+</div>
+
+<style>
+    .contact-header {
+        text-align: center;
+        font-size: 2.5em;
+        color: #264653;
+        margin-bottom: 30px;
+        font-weight: bold;
+        background-color: #53ac66;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .contact-container {
+        margin: 20px;
+        padding: 20px;
+        background-color: #f7f7f7;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-container h2 {
+        color: #2a9d8f;
+        font-size: 1.5em;
+    }
+
+    .contact-container p {
+        font-size: 1.1em;
+        margin-bottom: 15px;
+        color: #264653;
+    }
+
+    .contact-container ul {
+        padding-left: 20px;
+        margin-top: 10px;
+    }
+
+    .contact-container ul li {
+        margin-bottom: 5px;
+    }
+
+    .contact-container a {
+        color: #2a9d8f;
+        text-decoration: none;
+    }
+
+    .contact-container a:hover {
+        text-decoration: underline;
+    }
+</style>
 {% endblock %}
