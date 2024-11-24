@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-    <h1 class="d-flex justify-content-center">Homes for Sale:</h1>
-    <div class="d-flex justify-content-center mb-4">
-        <form method="get">
-            <div class="input-group mb-3">
-                <input type="text" name="zip_code" class="form-control" placeholder="Zip Code">
-                <input type="text" name="city" class="form-control" placeholder="City">
-                <input type="text" name="address" class="form-control" placeholder="Address">
+<div class="container">
+    <h1 class="text-center my-4">Homes for Sale</h1>
+
+    <!-- Search Form -->
+    <div class="mb-4">
+        <form method="get" class="d-flex flex-column align-items-center">
+            <div class="input-group mb-3" style="max-width: 600px;">
+                <input type="text" name="zip_code" class="form-control" placeholder="Zip Code" value="{{ request.GET.zip_code }}">
+                <input type="text" name="city" class="form-control" placeholder="City" value="{{ request.GET.city }}">
+                <input type="text" name="address" class="form-control" placeholder="Address" value="{{ request.GET.address }}">
             </div>
-            <div class="row g-3">
+            <div class="row g-3" style="max-width: 600px;">
                 <div class="col-md-6">
                     <label for="price-min" class="form-label">Min Price</label>
                     <input type="number" name="min_price" class="form-control" id="price-min" min="0" max="1000000000" value="{{ request.GET.min_price }}">
@@ -18,63 +22,71 @@
                     <label for="price-max" class="form-label">Max Price</label>
                     <input type="number" name="max_price" class="form-control" id="price-max" min="0" max="1000000000" value="{{ request.GET.max_price }}">
                 </div>
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary">Apply Search Filter</button>
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary mt-3">Apply Search Filter</button>
                 </div>
             </div>
         </form>
     </div>
 
-    <div class="container">
-        <h2 class="mb-4">Search Results:</h2>
-
-        {% if products %}
-        <div class="row">
-            {% for product in products %}
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    {% if product.image %}
-                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}">
-                    {% else %}
-                    <img src="{% static 'images/placeholder.jpg' %}" class="card-img-top" alt="No Image Available">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ product.title }}</h5>
-                        <p class="card-text">City: {{ product.city }}</p>
-                        <p class="card-text">Price: ${{ product.price }}</p>
-                        <p class="card-text">Bedrooms: {{ product.num_bedrooms }}</p>
-                        <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">View Details</a>
-                    </div>
+    <!-- Local Product Listings -->
+    <h2 class="mb-4">Local Products</h2>
+    {% if products %}
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}">
+                {% else %}
+                <img src="{% static 'images/placeholder.jpg' %}" class="card-img-top" alt="No Image Available">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.title }}</h5>
+                    <p class="card-text">City: {{ product.city }}</p>
+                    <p class="card-text">Price: ${{ product.price }}</p>
+                    <p class="card-text">Bedrooms: {{ product.num_bedrooms }}</p>
+                    <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">View Details</a>
                 </div>
             </div>
-            {% endfor %}
         </div>
-        {% else %}
-        <p>No local products found.</p>
-        {% endif %}
-
-        <h2 class="mt-5">External Property Listings:</h2>
-        {% if properties %}
-        <div class="row">
-            {% for property in properties %}
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    {% if property.photo %}
-                    <img src="{{ property.photo }}" class="card-img-top" alt="Property Photo">
-                    {% else %}
-                    <img src="{% static 'images/placeholder.jpg' %}" class="card-img-top" alt="No Image Available">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">${{ property.price }}</h5>
-                        <p class="card-text">{{ property.address.line }}, {{ property.address.city }}</p>
-                        <a href="#" class="btn btn-primary">View Details</a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <p>No external properties found.</p>
-        {% endif %}
+        {% endfor %}
     </div>
+    {% else %}
+    <p class="text-muted">No local products found.</p>
+    {% endif %}
+
+    <!-- External Property Listings -->
+    <h2 class="mt-5">External Property Listings</h2>
+    {% if properties %}
+    <div class="row">
+        {% for property in properties %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                {% if property.primary_photo %}
+                <img src="{{ property.primary_photo.href }}" class="card-img-top" alt="Property Photo">
+                {% else %}
+                <img src="{% static 'images/placeholder.jpg' %}" class="card-img-top" alt="No Image Available">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">${{ property.list_price | default:"Price not available" }}</h5>
+                    <p class="card-text">{{ property.location.address.line | default:"Address not available" }}, {{ property.location.address.city | default:"City not available" }}</p>
+                    <p class="card-text">State: {{ property.location.address.state | default:"State not available" }}</p>
+                    <p class="card-text">Bedrooms: {{ property.description.beds | default:"N/A" }}</p>
+                    <p class="card-text">Bathrooms: {{ property.description.baths | default:"N/A" }}</p>
+                    <a href="#" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No external properties found.</p>
+    {% endif %}
+
+    <!-- Fallback if No Results -->
+    {% if not products and not properties %}
+    <p class="text-center text-muted mt-4">No results found. Please try different search criteria.</p>
+    {% endif %}
+</div>
 {% endblock %}

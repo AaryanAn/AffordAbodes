@@ -2,13 +2,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from product import views
-from accounts import views as accounts_views
-
+from product import views as product_views  # Import the home view from product app
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', accounts_views.home, name='home'),  # Use the correct home view
+    path('', product_views.home, name='home'),  # Use the correct home view
     path('products/', include('product.urls')),
     path('accounts/', include('accounts.urls')),
 ]
