@@ -1,16 +1,15 @@
-<!-- base.html -->
+<!-- top bar -->
 <!DOCTYPE html>
 <html>
 <style>
-    /* Custom CSS for changing the navbar color */
     .custom-navbar {
         background-color: #1D8F35;
     }
     .custom-navbar .navbar-nav .nav-link {
-            color: white; /* Change font color to white */
+            color: white; 
     }
     .custom-navbar .navbar-brand {
-            color: white; /* Change font color to white */
+            color: white; 
     }
 
 </style>
@@ -29,7 +28,7 @@
                 <ul class="navbar-nav ml-auto">
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'product_list' %}">Homes for Sale</a>
+                        <a class="nav-link" href="{% url 'product_list' %}">Homes for Rent</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
@@ -54,7 +53,6 @@
         </div>
     </nav>
 
-    <!-- Your common template structure here -->
     {% block content %}{% endblock %}
 
     <!-- Optional: Include Bootstrap JavaScript and jQuery from CDN (if needed) -->

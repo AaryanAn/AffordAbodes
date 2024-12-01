@@ -5,12 +5,14 @@
     <h2>Login</h2>
     <br>
 
+    <!-- server error message -->
     {% if messages %}
       {% for message in messages %}
         <div class="alert alert-danger">{{ message }}</div>
       {% endfor %}
     {% endif %}
     
+    <!-- username -->
     <form method="post" class="form-signin">
       {% csrf_token %}
       <div class="form-group">
@@ -18,11 +20,13 @@
         {{ form.username }}
       </div>
       <br>
+      <!-- password -->
       <div class="form-group">
         {{ form.password.label_tag }}</label><br>
         {{ form.password }}
       </div>
       <br>
+      <!-- "login" button -->
       <button class="btn btn-primary" type="submit">Login</button>
     </form>
   </div>

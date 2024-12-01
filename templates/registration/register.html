@@ -2,11 +2,13 @@
 
 {% block content %}
   <div class="container" style="margin-top: 40px;">
+    <!-- Register heading -->
     <h2>Register</h2>
     <br>
     <form method="post" class="form-signin">
       {% csrf_token %}
       <div class="form-group">
+        <!-- username -->
         <label for="id_username">
           {{ form.username.label }} <span style="color: red;">*</span>
         </label><br>
@@ -14,6 +16,7 @@
       </div>
       <br>
       <div class="form-group">
+        <!-- email -->
         <label for="id_email">
           {{ form.email.label }} <span style="color: red;">*</span>
         </label><br>
@@ -21,6 +24,7 @@
       </div>
       <br>
       <div class="form-group">
+        <!-- password -->
         <label for="id_password1">
           {{ form.password1.label }} <span style="color: red;">*</span>
         </label><br>
@@ -31,12 +35,14 @@
       </div>
       <br>
       <div class="form-group">
+        <!-- re-enter password -->
         <label for="id_password2">
           {{ form.password2.label }} <span style="color: red;">*</span>
         </label><br>
         {{ form.password2 }}
       </div>
       <br>
+      <!-- "submit" button -->
       <button class="btn btn-primary" type="submit">Register</button>
     </form>
   </div>
