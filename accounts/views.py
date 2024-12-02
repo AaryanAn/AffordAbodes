@@ -4,11 +4,8 @@ from .forms import CustomUserCreationForm
 from django.views.generic import TemplateView
 from django.contrib.auth.views import LoginView
 from django.contrib import messages
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView
-from django.shortcuts import render
-from django.urls import reverse_lazy
-from django.contrib import messages
 
 def register(request):
     if request.method == 'POST':
@@ -20,7 +17,6 @@ def register(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
-
 @login_required
 def welcome_view(request):
     return render(request, 'welcome.html', {'username': request.user.username})
@@ -33,10 +29,8 @@ class FaqView(TemplateView):
 
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'
-    def get_success_url(self):
-        return reverse_lazy('welcome')
-
-    
+    def get_sucess_url(self):
+        return '/welcome/'
     def form_invalid(self, form):
         messages.error(self.request, "No user found. Please check your credentials or create an account.")
         return super().form_invalid(form)

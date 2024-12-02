@@ -1,23 +1,27 @@
+#imports
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product
 from .forms import ProductSearchForm, GeneralSearchForm, PriceRangeFilterForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+#Fetches a product and renders it page based on its id (error generated if not found) 
 def product_detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     return render(request, 'product_detail.html', {'product': product})
 
+#Defines the search aspect
 def home(request):
     form = GeneralSearchForm(request.GET)
     
     if request.method == 'GET' and 'search' in request.GET:
-        # The 'search' parameter is present in the query string, indicating a search request.
+        # Checks if search item is valid, constructs a URL if so, and redirects the user
         if form.is_valid():
             search_request = request.GET.urlencode()
             search_keyword = search_request.split('=')[1].replace('+',' ')
             search_keyword = search_keyword.replace('%2C',',')
             products = Product.objects.all()
 
+            #can search using zipcode, city, or address
             zip_code_list = list(products.filter(zip_code=search_keyword))
             city_list = list(products.filter(city__icontains=search_keyword))
             address_list = list(products.filter(address__icontains=search_keyword))
@@ -34,6 +38,7 @@ def home(request):
     return render(request, 'home.html', {'form': form})
             
 
+#This is the future implementation of the filter (sample code)
 def product_list(request):
     form = ProductSearchForm(request.GET)
     price_filter_form = PriceRangeFilterForm(request.GET)
