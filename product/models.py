@@ -1,9 +1,11 @@
+#import
 from django.db import models
 
+#storage of the product images in a directory
 def product_image_path(instance, filename):
-    # This function determines the upload path for product images
     return f'products/{instance.id}/{filename}'
 
+#defines the product class (in our case housing)
 class Product(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
@@ -17,6 +19,7 @@ class Product(models.Model):
     square_feet = models.PositiveIntegerField(blank=True, null=True)
     num_floors = models.PositiveIntegerField(blank=True, null=True)
 
+    #this will represent product object as a string
     def __str__(self):
         return self.title
 
