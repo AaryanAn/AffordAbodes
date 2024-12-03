@@ -2,30 +2,47 @@
 
 {% block content %}
   <div class="container" style="margin-top: 40px;">
+    <!-- Register heading -->
     <h2>Register</h2>
     <br>
     <form method="post" class="form-signin">
       {% csrf_token %}
       <div class="form-group">
-        <label for="id_username">{{ form.username.label }}</label><br>
+        <!-- username -->
+        <label for="id_username">
+          {{ form.username.label }} <span style="color: red;">*</span>
+        </label><br>
         {{ form.username }}
       </div>
       <br>
       <div class="form-group">
-        <label for="id_email">{{ form.email.label }}</label><br>
+        <!-- email -->
+        <label for="id_email">
+          {{ form.email.label }} <span style="color: red;">*</span>
+        </label><br>
         {{ form.email }}
       </div>
       <br>
       <div class="form-group">
-        <label for="id_password1">{{ form.password1.label }}</label><br>
+        <!-- password -->
+        <label for="id_password1">
+          {{ form.password1.label }} <span style="color: red;">*</span>
+        </label><br>
+        <small style="font-size: 80%; font-weight: 700; display: block; margin-top: 5px;">
+          Password must be at least 8 characters, contain a special character, and number.
+        </small>
         {{ form.password1 }}
       </div>
       <br>
       <div class="form-group">
-        <label for="id_password2">{{ form.password2.label }}</label><br>
+        <!-- re-enter password -->
+        <label for="id_password2">
+          {{ form.password2.label }} <span style="color: red;">*</span>
+        </label><br>
         {{ form.password2 }}
       </div>
       <br>
+      <!-- "submit" button -->
       <button class="btn btn-primary" type="submit">Register</button>
     </form>
   </div>
