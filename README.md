@@ -15,3 +15,22 @@ To set up and run the server, follow these steps:
 
    ```bash
    python manage.py runserver
+
+## Contributors
+
+- **Eric Bratu**  
+  - Fullstack Developer  
+  - Scrum Master  
+  - Mockup Creator  
+
+- **Grace Donath**  
+  - Frontend Developer  
+  - Fullstack Developer  
+
+- **Srinitha Srikanth**  
+  - Backend Developer  
+  - Fullstack Developer  
+
+- **Aaryan Anand**  
+  - Fullstack Developer  
+  - Housing Data Specialist  
